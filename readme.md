@@ -1522,8 +1522,8 @@ fca544126c32: Pushed
 
 ## 7. 보너스 과제 (추후 학습 예정)
 
-- [ ] **Docker Compose 기초** | 컨테이너 실행 명령이 "문서화된 실행 설정"으로 바뀌는 이유 | [링크](./compose-fundamentals.md)
+- [x] **Docker Compose 기초** | 컨테이너 실행 명령이 "문서화된 실행 설정"으로 바뀌는 이유 | [링크](./compose-fundamentals.md)
 - [ ] **Docker Compose 멀티 컨테이너** | 네트워크/서비스 디스커버리 개념 맛보기 [링크](./multi-service-setup.md)
-- [ ] **Compose 운영 명령어 습득** | 운영 관점의 "상태 확인 루틴" 만들기 [링크](./compose-commands.md)
-- [ ] **환경 변수 활용** | 설정과 코드의 분리 [링크](./environment-variables.md)
-- [ ] **GitHub SSH 키 설정** | 인증 방식 차이와 보안 습관 | [링크](./github-ssh.md)
+- [x] **Compose 운영 명령어 습득** | 운영 관점의 "상태 확인 루틴" 만들기 [링크](./compose-commands.md)
+- [x] **환경 변수 활용** | 설정과 코드의 분리 [링크](./environment-variables.md)
+- [x] **GitHub SSH 키 설정** | 인증 방식 차이와 보안 습관 | [링크](./github-ssh.md)
