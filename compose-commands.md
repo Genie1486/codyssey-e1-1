@@ -1,6 +1,4 @@
-
-
-# 📋 Docker Compose 운영 명령어
+# 📋 Docker Compose 운영 명령어 실습
 
 ## 🧠 개념 정리
 
