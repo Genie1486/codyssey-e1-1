@@ -145,6 +145,27 @@ $ vi docker-compose.yml
 $ docker-compose up -d
 ```
 
+```bash
+# 참고
+$ docker compose up
+→ 이미 빌드된 이미지가 있으면? → 그냥 기존 이미지 사용 (재빌드 X)
+→ 이미지가 아예 없을 때만?    → 새로 빌드
+
+docker compose up --build
+→ 이미지 존재 여부와 상관없이 → 항상 강제 재빌드
+
+# 처음 실행	
+$ docker compose up -d
+
+# 코드/Dockerfile 수정 후	
+$ docker compose up --build -d 
+
+# 확실히 깨끗하게 재빌드	
+$ docker compose build --no-cache
+$ docker compose up -d
+```
+
+
 ### 출력 예시
 ```
 Creating network "ssh_test_default" with the default driver
