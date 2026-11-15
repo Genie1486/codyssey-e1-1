@@ -58,14 +58,14 @@ $ wsl --install -d Ubuntu
 Ubuntu 시작하는 중...
 Provisioning the new WSL instance Ubuntu
 This might take a while...
-Create a default Unix user account: redna
+Create a default Unix user account: username
 New password:
 Retype new password:
 passwd: password updated successfully
 
 # 설치완료 후 자동으로 Ubuntu Bash Shell로 진입
 # exit 입력 후 PowerShell로 돌아와 다음 단계 진행
-redna@js:/mnt/c/WINDOWS/System32$ : exit
+username@js:/mnt/c/WINDOWS/System32$ : exit
 ```
 
 
@@ -82,7 +82,7 @@ $ wsl -l -v
 ```PowerShell
 # PowerShell에서 작업
 $ wsl -d Ubuntu
-redna@js:/mnt/c/WINDOWS/System32$
+username@js:/mnt/c/WINDOWS/System32$
 ```
 
 ⚠️ 문제 발생 시: Ubuntu 재설치  
@@ -135,13 +135,13 @@ ___
 $ wsl -d Ubuntu
 
 # Ubuntu Bash Shell 진입 확인
-redna@js:/mnt/c/WINDOWS/System32$
+username@js:/mnt/c/WINDOWS/System32$
 
 # Home 폴더로 이동
-redna@js:/mnt/c/WINDOWS/System32$ cd ~
-redna@js:~$
+username@js:/mnt/c/WINDOWS/System32$ cd ~
+username@js:~$
 
-# 이 밑으로는 "redna@js:~$" 대신 "$" 로만 표기
+# 이 밑으로는 "username@js:~$" 대신 "$" 로만 표기
 ```
 
 
@@ -150,20 +150,22 @@ redna@js:~$
 
 # 1. 현재 위치 확인
 $ pwd
-/home/redna
+
+/home/username
 
 # 2. 목록 확인 (숨김 파일 포함)
 $ ls -al
+
 total 32
-drwxr-x--- 4 redna redna 4096 Nov  5 15:27 .
+drwxr-x--- 4 username username 4096 Nov  5 15:27 .
 drwxr-xr-x 3 root  root  4096 Nov  5 15:25 ..
--rw------- 1 redna redna   50 Nov  5 16:24 .bash_history
--rw-r--r-- 1 redna redna  220 Nov  5 15:25 .bash_logout
--rw-r--r-- 1 redna redna 3771 Nov  5 15:25 .bashrc
-drwxr-x--- 4 redna redna 4096 Nov  5 15:25 .cache
-drwxr-x--- 3 redna redna 4096 Nov  5 15:25 .config
--rw-rw-r-- 1 redna redna    0 Nov  5 15:25 .motd_shown
--rw-r--r-- 1 redna redna  807 Nov  5 15:25 .profile
+-rw------- 1 username username   50 Nov  5 16:24 .bash_history
+-rw-r--r-- 1 username username  220 Nov  5 15:25 .bash_logout
+-rw-r--r-- 1 username username 3771 Nov  5 15:25 .bashrc
+drwxr-x--- 4 username username 4096 Nov  5 15:25 .cache
+drwxr-x--- 3 username username 4096 Nov  5 15:25 .config
+-rw-rw-r-- 1 username username    0 Nov  5 15:25 .motd_shown
+-rw-r--r-- 1 username username  807 Nov  5 15:25 .profile
 
 # 3. 폴더 생성
 $ mkdir practice
@@ -171,11 +173,13 @@ $ mkdir practice
 # 4. 폴더 이동
 $ cd practice
 $ pwd
-/home/redna/practice
+
+/home/username/practice
 
 # 5. 빈 파일 생성
 $ touch file_A.txt
 $ ls
+
 file_A.txt
 
 # 6. 파일에 내용 쓰기 (touch로 만든 파일에 덮어쓰기)
@@ -183,31 +187,38 @@ $ echo "파일 A입니다." > file_A.txt
 
 # 7. 파일 내용 확인
 $ cat file_A.txt
+
 파일 A입니다.
 
 # 8. 파일 복사
 $ cp file_A.txt file_A_copy.txt
 $ ls
+
 file_A.txt  file_A_copy.txt
+
 $ cat file_A_copy.txt
 파일 A입니다.
 
 # 9. 파일 이름 변경
 $ mv file_A_copy.txt file_B.txt
 $ ls
+
 file_A.txt  file_B.txt
 
 # 10. 파일 이동 (폴더 B를 만들고 file_B를 이동)
 $ mkdir B
 $ mv file_B.txt B/file_B.txt
 $ ls
+
 B  file_A.txt
 $ ls B
+
 file_B.txt
 
 # 11. 파일 삭제
 $ rm file_A.txt
 $ ls
+
 B
 
 # 12. 폴더 삭제
@@ -249,26 +260,30 @@ $ ls
 $ mkdir secure_configs
 $ echo "DB_PASSWORD=super-secret-1234" > db_password.txt
 $ ls
-db_password.txt  secure_configs
 
+db_password.txt  secure_configs
+username
 # 1️⃣ 변경 전 권한 확인
 # 기본 권한은 보통 소유자/그룹/기타 사용자 모두에게 읽기 권한이 열려 있습니다.
 $ ls -l
+
 total 8
--rw-r--r-- 1 redna redna   30 Nov  7 19:48 db_password.txt
-drwxr-xr-x 2 redna redna 4096 Nov  7 19:48 secure_configs
+-rw-r--r-- 1 username username   30 Nov  7 19:48 db_password.txt
+drwxr-xr-x 2 username username 4096 Nov  7 19:48 secure_configs
 
 # 2️⃣ 권한 변경 - 숫자 표기법 (chmod 숫자)
 
 # [의도] secure_configs: 설정 폴더는 관리자(소유자) 외에 누구도 들어오거나 목록을 볼 수 없어야 합니다.
 $ chmod 700 secure_configs
 $ ls -ld secure_configs
-drwx------ 2 redna redna 4096 Nov  7 19:48 secure_configs
+
+drwx------ 2 username username 4096 Nov  7 19:48 secure_configs
 
 # [의도] db_password.txt: 비밀번호 파일은 소유자만 읽고 수정할 수 있도록 제한하여 유출을 방지합니다.
 $ chmod 600 db_password.txt
 $ ls -l db_password.txt
--rw------- 1 redna redna 30 Nov  7 19:48 db_password.txt
+
+-rw------- 1 username username 30 Nov  7 19:48 db_password.txt
 
 
 # 3️⃣ 권한 변경 - 심볼릭 표기법 (chmod u/g/o)
@@ -276,12 +291,14 @@ $ ls -l db_password.txt
 # [의도] secure_configs: 특정 서비스 계정이 폴더 내 파일에 접근해야 할 경우를 대비해 '실행(x)' 권한만 개방합니다.
 $ chmod o+x secure_configs
 $ ls -ld secure_configs
-drwx-----x 2 redna redna 4096 Nov  7 19:48 secure_configs
+
+drwx-----x 2 username username 4096 Nov  7 19:48 secure_configs
 
 # [의도] db_password.txt: 협업하는 팀원(그룹)들이 설정을 읽고 배포할 수 있도록 '읽기(r)' 권한을 추가합니다.
 $ chmod g+r db_password.txt
 $ ls -l db_password.txt
--rw-r----- 1 redna redna 30 Nov  7 19:48 db_password.txt
+
+-rw-r----- 1 username username 30 Nov  7 19:48 db_password.txt
 ```
 
 
@@ -296,6 +313,7 @@ $ sudo apt update
 
 # Docker 설치
 $ sudo apt install -y docker.io
+
 Installing:
   docker.io
 ...
@@ -320,6 +338,7 @@ $ sudo systemctl enable docker
 # 서비스 상태 확인 (정상 동작 및 자동 시작 설정 여부)
 # [의도] Active: active (running) 상태와 'enabled' 설정을 확인합니다.
 $ sudo systemctl status docker
+
 ● docker.service - Docker Application Container Engine
      Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabled)
      Active: active (running) since Sat 2026-11-07 20:02:09 KST; 9min ago
@@ -346,6 +365,7 @@ $ sudo systemctl restart docker
 
 # 에러 로그 확인 (문제가 생겨 실행되지 않을 때 원인 파악용)
 $ sudo journalctl -u docker
+
 Nov 05 17:12:03 js systemd[1]: Starting docker.service - Docker Application Container Engine...
 ...
 Nov 05 17:29:24 js dockerd[3588]: time="2026-11-05T17:29:24.753108121+09:00" level=info msg="Starting up"
@@ -357,6 +377,7 @@ lines 1-29
 
 # 4️⃣ 최종 설치 확인
 $ sudo docker info
+
 Client:
  Version:    29.1.3
  Context:    default
@@ -388,6 +409,7 @@ $ exit
 
 # 이제 sudo 없이 docker 명령어 사용 가능
 $ docker info
+
 Client:
  Version:    29.1.3
  Context:    default
@@ -418,11 +440,13 @@ Server:
 
 # [추적성 확보] 실행 시점의 날짜와 시간 기록
 $ date
+
 Sat Nov  7 20:37:19 KST 2026
 
 
 # 1️⃣ 이미지 다운로드 & 컨테이너 실행
 $ docker run hello-world
+
 Unable to find image 'hello-world:latest' locally
 latest: Pulling from library/hello-world
 4f55086f7dd0: Pull complete
@@ -433,15 +457,18 @@ This message shows that your installation appears to be working correctly.
 
 # 2️⃣ 다운로드된 이미지 확인
 $ docker images
+
 IMAGE                ID             DISK USAGE   CONTENT SIZE
 hello-world:latest   c567b231f656       25.9kB         9.49kB
 
 # 3️⃣ 실행 중인 컨테이너 확인 (hello-world는 실행 후 즉시 종료됨)
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 # 4️⃣ 종료된 컨테이너까지 전체 확인 (실행/종료 시간 정보 포함)
 $ docker ps -a
+
 CONTAINER ID   IMAGE         COMMAND    CREATED         STATUS                     NAMES
 16e10cf5fd07   hello-world   "/hello"   4 minutes ago   Exited (0) 4 minutes ago   inspiring_wright
 ```
@@ -475,9 +502,11 @@ $ docker run -it my-ubuntu ubuntu bash
 
 # 컨테이너 내부에서 간단 명령(ls, echo) 수행결과
 $ ls
+
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 
 $ echo "Hello from container"
+
 Hello from container
 
 # 컨테이너 종료
@@ -490,6 +519,7 @@ $ exit
 
 # 3️⃣ 로그 확인
 $ docker logs my-ubuntu
+
 root@505a8db31a50:/# ls
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 root@505a8db31a50:/# echo "Hello from containder"
@@ -501,6 +531,7 @@ exit
 
 # 4️⃣ 리소스 확인
 $ docker stats my-ubuntu
+
 CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT   MEM %     NET I/O   BLOCK I/O   PIDS
 505a8db31a50   my-ubuntu   0.00%     0B / 0B             0.00%     0B / 0B   0B / 0B     0
 ```
@@ -512,9 +543,11 @@ CONTAINER ID   NAME        CPU %     MEM USAGE / LIMIT   MEM %     NET I/O   BLO
 ```bash
 # 1️⃣ 백그라운드 실행
 $ docker run -it -d --name my-ubuntu ubuntu bash
+
 1c8bea5cd7a5ef81bd7a7dd5793934f0e5887001d538efda87c2daeb1f11da9f
 
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS          PORTS     NAMES
 04bc555411c4   ubuntu    "bash"    30 seconds ago   Up 29 seconds             my-ubuntu
 ```
@@ -536,6 +569,7 @@ root@xxxxx:/# exit
 
 # exit 하면 컨테이너도 종료됨
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 # ==================================
@@ -547,6 +581,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 $ docker start my-ubuntu
 $ docker exec -it my-ubuntu bash
+
 # -------컨테이너 내부 진입----------
 root@xxxxx:/# ls
 root@xxxxx:/# pwd
@@ -555,6 +590,7 @@ root@xxxxx:/# exit
 
 # exit 해도 컨테이너는 유지됨
 $ docker ps
+
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS          PORTS     NAMES
 04bc555411c4   ubuntu    "bash"    23 minutes ago   Up 10 minutes     
 ```
@@ -638,6 +674,7 @@ CMD ["python", "app.py"]
 
 # github에서 프로젝트 코드 가져오기 
 $ git clone https://github.com/Genie1486/guestbook.git
+
 Cloning into 'guestbook'...
 remote: Enumerating objects: 10, done.
 remote: Counting objects: 100% (10/10), done.
@@ -648,6 +685,7 @@ Receiving objects: 100% (10/10), done.
 # 이미지 파일 빌드 하려면 dockerfile 있는 폴더로 진입해야함
 $ cd guestbook  
 $ ls
+
 Dockerfile  app.py  data  requirements.txt  templates
 
 # 프로젝트 디렉토리 구조 확인
@@ -671,6 +709,7 @@ guestbook/
 ```bash
 # ── 이미지 빌드 ──────────────────────────────────────────
 $ docker build -t guestbook:1.0 .
+
 [+] Building 4.7s (12/12) FINISHED                                                                       docker:default
  => [internal] load build definition from Dockerfile                                                               0.0s
  => => transferring dockerfile: 686B                                                                               0.0s
@@ -698,6 +737,7 @@ $ docker build -t guestbook:1.0 .
 
 # 빌드 잘 되었는지 확인
 $ docker images
+
 IMAGE              ID             DISK USAGE   CONTENT SIZE   EXTRA
 guestbook:1.0      beca38b24f4c        234MB         56.9MB
 ```
@@ -724,6 +764,7 @@ guestbook:1.0      beca38b24f4c        234MB         56.9MB
 
 # 컨테이너 실행
 $ docker run -d --name  guestbook-app guestbook:1.0
+
 2d467bfb2a3a9c6a1162589b2b3b83388f757a3e2719e0ab24e8db899bdf2d3b
 
 $ docker exec -it guestbook-app bash
@@ -735,6 +776,7 @@ root@xxxxx:/# curl http://localhost:5000
 
 # app 잘 돌고 있는지 확인
 root@xxxxx:/# curl http://localhost:5000/health
+
 {
   "status": "ok"
 }
@@ -744,6 +786,7 @@ root@xxxxx:/# exit
 
 # 포트포워딩이 되어있지 않아 컨테이너 밖에서는 접근 불가능
 $ curl http://localhost:5000/health
+
 curl: (7) Failed to connect to localhost port 5000 after 0 ms: Could not connect to server                                         
 ```
 
@@ -802,26 +845,31 @@ curl: (7) Failed to connect to localhost port 5000 after 0 ms: Could not connect
 
 # 8080 포트로 접근할 수 있는 컨테이너 만들기
 $ docker run -d -p 8080:5000 --name guestbook-app-8080 guestbook:1.0
+
 5e199748517ef78227884d4d8ba441ff36e2b340f7946f2222cf4716f2be2bb2
 
 # 8080 포트 실행 확인
 $ curl http://localhost:8080/health
+
 {
   "status": "ok"
 }
 
 # 8081 포트로 접근할 수 있는 컨테이너 다시 만들기
 $ docker run -d -p 8081:5000 --name guestbook-app-8081 guestbook:1.0
+
 d7e6741d011dee4987ad8df3eb612c1895e3e405fa275d4344e3c709dd547dc7
 
 # 8081 포트 실행 확인
 $ curl http://localhost:8081/health
+
 {
   "status": "ok"
 }
 
 # 컨테이너 상태 조회
 $ docker ps
+
 CONTAINER ID   IMAGE           COMMAND           CREATED              STATUS                        PORTS                                         NAMES
 d7e6741d011d   guestbook:1.0   "python app.py"   About a minute ago   Up About a minute (healthy)   0.0.0.0:8081->5000/tcp, [::]:8081->5000/tcp   guestbook-app-8081
 5e199748517e   guestbook:1.0   "python app.py"   5 minutes ago        Up 5 minutes (healthy)        0.0.0.0:8080->5000/tcp, [::]:8080->5000/tcp   guestbook-app-8080
@@ -862,6 +910,7 @@ $ docker rm -f guestbook-app-8081
 $ docker run -d --name guestbook-app-no-mount \
   -p 8080:5000 \
   guestbook:1.0
+
 f60aacde6bce198c19857130d524656911f2890c1796bba0c819f7b39cc63d86
 
 # guestbook-mount는 바인드 마운트 하여 실행한 컨테이너
@@ -870,13 +919,14 @@ $ docker run -d --name guestbook-app-with-mount \
   -p 8081:5000 \
   -v $(pwd):/app \
   guestbook:1.0
+
 cb6b959e9562cb5ed0c67ae71b59ec6acfb54f210550dabc985bbd73b18969f7
 
 # ── 절대경로 vs 상대경로 사용 기준 ───────────────────────────
 #
 # [절대경로] 루트(/)부터 시작하는 전체 경로
 #   → 현재 위치와 무관하게 항상 동일한 대상을 가리킴
-#   → 예: /home/redna/guestbook:/app
+#   → 예: /home/username/guestbook:/app
 #
 # [상대경로] 현재 위치(.)를 기준으로 하는 경로
 #   → 현재 디렉토리가 바뀌면 가리키는 대상도 달라짐
@@ -894,17 +944,18 @@ cb6b959e9562cb5ed0c67ae71b59ec6acfb54f210550dabc985bbd73b18969f7
 #
 # ✅ $(pwd) 사용 → 터미널에서 직접 실행할 때 절대경로 대체
 #   - 현재 디렉토리를 자동으로 절대경로로 변환해줌
-#   - 예: $(pwd) → /home/redna/guestbook 으로 자동 변환
+#   - 예: $(pwd) → /home/username/guestbook 으로 자동 변환
 #   - 단, 실행 위치가 바뀌면 마운트 대상도 바뀌므로 주의
 #
 # ❌ 상대경로 직접 사용 금지 → Docker가 인식 못해 오류 발생
 #   잘못된 예: -v ./guestbook:/app   ← 오류!
 #   올바른 예: -v $(pwd):/app
-#           또는 -v /home/redna/guestbook:/app
+#           또는 -v /home/username/guestbook:/app
 # ──────────────────────────────────────────────────────────────
 
 # 컨테이너 생성 확인
 $ docker ps
+
 CONTAINER ID   IMAGE           COMMAND           CREATED         STATUS                            PORTS                                         NAMES
 cb6b959e9562   guestbook:1.0   "python app.py"   4 seconds ago   Up 3 seconds (health: starting)   0.0.0.0:8081->5000/tcp, [::]:8081->5000/tcp   guestbook-app-with-mount
 f60aacde6bce   guestbook:1.0   "python app.py"   4 minutes ago   Up 4 minutes (healthy)            0.0.0.0:8080->5000/tcp, [::]:8080->5000/tcp   guestbook-app-no-mount
@@ -915,10 +966,12 @@ f60aacde6bce   guestbook:1.0   "python app.py"   4 minutes ago   Up 4 minutes (h
 
 # 로컬에서 index.html 파일 수정
 $ pwd 
-/home/redna/guestbook
+
+/home/username/guestbook
 $ cd app/templates/
 $ ls 
 index.html
+
 $ vi index.html
 # vi 편집기에서 i버튼 눌려서 수정 진행함
 # 수정 전: <h1>📖 방명록</h1>
@@ -930,6 +983,7 @@ $ vi index.html
 # 수정 내용을 반영하려면 
 # 컨테이너 중지 -> 컨테이너 삭제 -> 이미지 다시 빌드 -> 새 이미지로 컨테이너 다시 생성 해야함
 $ curl http://localhost:8080
+
 <!DOCTYPE html>
 <html lang="ko">
 ...
@@ -940,6 +994,7 @@ $ curl http://localhost:8080
 # guestbook-with-mount에서는 컨테이너에서는 바인드 마운트를 했기 때문에
 # 이미지 재빌드 안해도 index.html 내용이 바뀜
 $ curl http://localhost:8081  
+
 <!DOCTYPE html>
 ...
     <h1>📖 로컬에서 수정한 방명록</h1>
@@ -962,10 +1017,12 @@ $ docker rm-f guestbook-app-with-mount
 # 1. Docker 전용 볼륨 생성
 #   - guestbook_data 볼륨에 방명록을 저장할 예정
 $ docker volume create guestbook-data
+
 guestbook-data
 
 # 2. 생성된 볼륨을 확인
 $ docker volume ls 
+
 DRIVER    VOLUME NAME
 local     guestbook-data
 
@@ -974,6 +1031,7 @@ $ docker run -d --name guestbook-app \
   -p 8080:5000 \
   -v guestbook-data:/app/data \
   guestbook:1.0
+
 02815b7730b0688def6d7e81cac1ef31f1b85a6ac88e8c943ee7268cbdfac4e3
 
 
@@ -986,6 +1044,7 @@ $ curl -X POST http://localhost:8080/write -d "name=홍길동2&message=안녕하
 
 # 입력된 데이터 확인
 $ curl http://localhost:8080
+
 <!DOCTYPE html>
 ...
 ...
@@ -1004,6 +1063,7 @@ $ curl http://localhost:8080
 
 # 컨테이너 강제 삭제 (볼륨은 유지됨)
 $ docker rm -f guestbook-app
+
 guestbook-app
 
 
@@ -1012,14 +1072,17 @@ $ docker run -d --name guestbook-app \
   -p 8080:5000 \
   -v guestbook-data:/app/data \
   guestbook:1.0
+
 559035d246108e96862a78cbe1045e1a7b4e58376f192d4e450894876272b946
 
 # JSON 파일 열어서 데이터 생존 확인
 docker exec guestbook-app cat /app/data/guestbook.json
+
 [{"name": "홍길동1", "message": "안녕하세요1"}, {"name": "홍길동2", "message": "안녕하세요2"}]
 
 # 웹 응답으로 데이터 생존 확인
 $ curl http://localhost:8080
+
 <!DOCTYPE html>
 ...
 ...
@@ -1038,6 +1101,7 @@ $ curl http://localhost:8080
 
 # 파일 소유자 및 권한 확인
 $ docker exec guestbook-app ls -l /app/data/guestbook.json
+
 -rw-r--r-- 1 root root 110 Nov  7 12:33 /app/data/guestbook.json
 
 # [결과 분석]
@@ -1096,7 +1160,8 @@ $ docker exec guestbook-app ls -l /app/data/guestbook.json
 
 $ mkdir test && cd test
 $ pwd
-/home/redna/test
+
+/home/username/test
 ```
 
 ```bash
@@ -1113,6 +1178,7 @@ $ git config --global init.defaultBranch main
 
 # 설정 확인
 $ git config --list
+
 init.defaultbranch=main
 user.name=너의이름
 user.email=너의이메일@gmail.com
@@ -1123,7 +1189,8 @@ user.email=너의이메일@gmail.com
 
 # git 초기화 (이 폴더를 Git이 관리하도록 설정)
 $ git init
-Initialized empty Git repository in /home/redna/test/.git/
+
+Initialized empty Git repository in /home/username/test/.git/
 
 # README.md 파일 생성
 $ echo "VS code와 연동되었습니다." > README.md
@@ -1133,6 +1200,7 @@ $ git add .
 
 # 첫 커밋
 $ git commit -m "first commit"
+
 [main (root-commit) 8d14806] first commit
  1 file changed, 1 insertion(+)
  create mode 100644 README.md
@@ -1236,6 +1304,7 @@ Docker가 해당 포트를 사용하지 못하는 것 아닐까?
 #   -p  소켓을 사용 중인 프로세스 정보 표시
 
 $ ss -tulnp | grep 8080
+
 tcp   LISTEN  0  128  0.0.0.0:8080  0.0.0.0:*  users:(("docker-proxy",pid=1234,fd=4))
 #                                                          ↑ 프로세스명       ↑ PID
 
@@ -1249,6 +1318,7 @@ tcp   LISTEN  0  128  0.0.0.0:8080  0.0.0.0:*  users:(("docker-proxy",pid=1234,f
 # lsof : 포트를 점유한 프로세스의 상세 정보 확인
 
 $ sudo lsof -i :8080
+
 COMMAND     PID  USER   FD   TYPE  DEVICE  SIZE/OFF  NODE  NAME
 docker-pr  1234  root   4u   IPv4  12345      0t0    TCP   *:8080 (LISTEN)
 #            ↑ PID 확인
@@ -1264,6 +1334,7 @@ docker-pr  1234  root   4u   IPv4  12345      0t0    TCP   *:8080 (LISTEN)
 
 # ── WSL 대체 진단: docker ps ─────────────────────────────────
 $ docker ps --format "table {{.Names}}\t{{.Ports}}" | grep 8080
+
 guestbook-app   0.0.0.0:8080->5000/tcp
 # ↑ 8080을 점유 중인 컨테이너 이름 확인 완료
 ```
@@ -1288,15 +1359,18 @@ $ ss -tulnp | grep 8080
 
 # 3. 컨테이너 재실행
 $ docker run -d -p 8080:5000 --name guestbook-app guestbook:1.0
+
 a3f9c1d2e4b5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1
 
 # 4. 실행 결과 검증
 $ docker ps
+
 CONTAINER ID   IMAGE           COMMAND           CREATED         STATUS          PORTS                                         NAMES
 a3f9c1d2e4b5   guestbook:1.0   "python app.py"   5 seconds ago   Up 4 seconds    0.0.0.0:8080->5000/tcp, [::]:8080->5000/tcp   guestbook-app
 # ↑ PORTS 컬럼에 0.0.0.0:8080->5000/tcp 표시 → 포트 매핑 정상 ✅
 
 $ curl http://localhost:8080/health
+
 {
   "status": "ok"
 }
@@ -1310,15 +1384,18 @@ $ curl http://localhost:8080/health
 
 # 1. 비어있는 포트(8082)로 컨테이너 실행
 $ docker run -d -p 8082:5000 --name guestbook-app guestbook:1.0
+
 b4e8f2a1c3d5e7f9a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6
 
 # 2. 실행 결과 검증
 $ docker ps
+
 CONTAINER ID   IMAGE           COMMAND           CREATED         STATUS          PORTS                                         NAMES
 b4e8f2a1c3d5   guestbook:1.0   "python app.py"   5 seconds ago   Up 4 seconds    0.0.0.0:8082->5000/tcp, [::]:8082->5000/tcp   guestbook-app
 # ↑ PORTS 컬럼에 0.0.0.0:8082->5000/tcp 표시 → 포트 매핑 정상 ✅
 
 $ curl http://localhost:8082/health
+
 {
   "status": "ok"
 }
@@ -1351,6 +1428,7 @@ Docker Hub에서 이미지를 pull해서 바로 실행하지 않을까?
 # ----[개발자 PC]---------------------
 # 이미지 빌드 
 $ docker build -t 내아이디/guestbook:1.0 .
+
 [+] Building 2.0s (12/12) FINISHED
 ...
 ...
@@ -1360,6 +1438,7 @@ $ docker build -t 내아이디/guestbook:1.0 .
 
 # 이미지 push
 $ docker push 내아이디/guestbook:1.0:1.0
+
 The push refers to repository [docker.io/내아이디/guestbook]
 37fb86c2a767: Pushed
 53daecf7856e: Pushed
@@ -1383,6 +1462,7 @@ $ ls
 
 # 이미지 pull
 $ docker pull 내아이디/guestbook:1.0
+
 1.0: Pulling from 내아이디/guestbook
 fca544126c32: Pull complete
 bbe7053e6def: Pull complete
@@ -1401,6 +1481,7 @@ docker.io/내아이디guestbook:1.0
 
 # 컨테이너 생성
 $ docker run -d -p 8080:5000 --name guestbook-app 내아이디/guestbook:1.0
+
 8c909827339ae84e190180d3e9481b438c9b25a0233c84dfade860753c3b68b1
 
 # 컨테이너 동작 확인
@@ -1480,6 +1561,7 @@ Access Token을 비밀번호 대신 사용할 수 있음을 확인
 # 해결 검증 로그
 # ✅ 로그인
 $ docker login -u 내아이디
+
 USING WEB-BASED LOGIN
 
 i Info → To sign in with credentials on the command line, use 'docker login -u <username>'
@@ -1490,7 +1572,7 @@ Press ENTER to open your browser or submit your device code here: https://login.
 
 Waiting for authentication in the browser…
 ^Clogin canceled
-redna@js:~$ docker login -u genie1486
+username@js:~$ docker login -u genie1486
 
 i Info → A Personal Access Token (PAT) can be used instead.
          To create a PAT, visit https://app.docker.com/settings
@@ -1501,6 +1583,7 @@ Login Succeeded
 
 # ✅ push 정상 동작 확인
 $ docker push 내아이디/guestbook:1.0
+
 The push refers to repository [docker.io/내아이디/guestbook]
 53daecf7856e: Pushed
 8e191f69611d: Pushed
@@ -1516,6 +1599,93 @@ fca544126c32: Pushed
 1.0: digest: sha256:e4460f0613bdb52b60b697067a3416a8b3aacb247601e943766649ca0a54e5de size: 856
 ```
 
+---
+
+### 🚨 Issue 3: Docker WSL2 트러블슈팅
+
+```bash
+# ❌ 문제 상황
+Ubuntu WSL2 터미널에서 Docker 명령어 실행 시 아래 오류 발생
+
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock.
+Is the docker daemon running?
+```
+
+```bash
+# 🔍 원인 분석
+# powershell
+# 1. WSL 기본 distro 확인
+$ wsl --list --verbose
+
+  NAME              STATE           VERSION
+* docker-desktop    Running         2
+  Ubuntu            Running         2
+
+* 표시가 docker-desktop에 되어 있었음
+→ 기본 distro가 Ubuntu가 아닌 docker-desktop으로 설정된 상태
+
+
+# 2. 문제 발생 구조
+기본 distro = docker-desktop
+        ↓
+Docker Desktop이 Ubuntu를 기본 distro로 인식하지 못함
+        ↓
+Ubuntu에 /var/run/docker.sock 소켓 연결 안 됨
+        ↓
+Ubuntu에서 모든 Docker 명령어 실패
+
+
+# 3. 핵심 원인
+Docker Desktop은 기본(default) distro에만 자동으로 소켓을 연결한다.
+기본 distro가 Ubuntu가 아니면 Docker Desktop이 Ubuntu를 인식하지 못해
+소켓 연결이 이루어지지 않는다.
+```
+
+```bash
+# ✅ 해결 방법
+# Step 1. 기본 distro를 Ubuntu로 변경
+
+# powershell에서 명령어 입력 !!!
+$ wsl --set-default Ubuntu
+
+# Step 2. 변경 확인
+# powershell에서 명령어 입력 !!!
+$ wsl --list --verbose
+
+  NAME              STATE           VERSION
+* Ubuntu            Running         2   ← * 가 Ubuntu로 이동!
+  docker-desktop    Running         2
+
+
+# Step 3. Docker Desktop 완전 재시작
+# 작업표시줄 → Docker Desktop 우클릭 → Quit Docker Desktop → Docker Desktop 다시 실행
+
+
+# Step 4. 정상 작동 확인
+# Ubuntu WSL2 터미널에서 실행
+$ docker run hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+...
+```
+
+```bash
+# 📌 요약
+WSL 기본 distro가 docker-desktop으로 설정되어 있어
+Docker Desktop이 Ubuntu를 인식하지 못하고 소켓 연결에 실패했다.
+wsl --set-default Ubuntu 명령어로 기본 distro 변경 후
+Docker Desktop을 완전 재시작하여 해결!
+```
+
+
+💡 핵심 개념
+
+| 용어 | 설명 |
+|---|---|
+| 기본 distro | `wsl` 명령어만 입력했을 때 자동 실행되는 Linux 배포판 |
+| WSL Integration | Docker Desktop이 특정 distro에 소켓을 연결해주는 설정 |
+| docker.sock | Docker 클라이언트와 데몬이 통신하는 소켓 파일 |
 
 
 ---
@@ -1523,7 +1693,7 @@ fca544126c32: Pushed
 ## 7. 보너스 과제 (추후 학습 예정)
 
 - [x] **Docker Compose 기초** | 컨테이너 실행 명령이 "문서화된 실행 설정"으로 바뀌는 이유 | [링크](./compose-fundamentals.md)
-- [ ] **Docker Compose 멀티 컨테이너** | 네트워크/서비스 디스커버리 개념 맛보기 [링크](./multi-service-setup.md)
+- [x] **Docker Compose 멀티 컨테이너** | 네트워크/서비스 디스커버리 개념 맛보기 [링크](./multi-service-setup.md)
 - [x] **Compose 운영 명령어 습득** | 운영 관점의 "상태 확인 루틴" 만들기 [링크](./compose-commands.md)
 - [x] **환경 변수 활용** | 설정과 코드의 분리 [링크](./environment-variables.md)
 - [x] **GitHub SSH 키 설정** | 인증 방식 차이와 보안 습관 | [링크](./github-ssh.md)

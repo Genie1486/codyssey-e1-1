@@ -166,6 +166,7 @@ guestbook-app   python app.py     Up      0.0.0.0:8080->5000/tcp
 ### Step 5: 실제로 요청 날려보기
 ```bash
 $ curl http://localhost:8080/
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
